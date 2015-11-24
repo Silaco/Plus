@@ -194,13 +194,13 @@ def SubmitPlay(request):
     [current]
     {{ public_ip_address }}
     """
-    for (name,value) in request.GET:
+    # for (name,value) in request.GET:
         
-        if name=='Servers':
-            html=html+str(value+'\n')
+        # if name=='Servers':
+            # html=html+str(value+'\n')
    
 
-
+    html=request.GET['Severs']
     inventory_template = jinja2.Template(inventory)
     rendered_inventory = inventory_template.render({
         'public_ip_address': html    
