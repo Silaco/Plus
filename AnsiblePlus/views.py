@@ -211,6 +211,8 @@ def SubmitPlay(request):
     hosts = NamedTemporaryFile(delete=False)
     hosts.write(rendered_inventory)
     hosts.close()
+    
+    print(hosts.name)
 
     import ansiblepythonapi as myPlay
     args=['test.yml']
