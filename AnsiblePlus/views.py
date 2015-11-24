@@ -39,7 +39,7 @@ def SaveAppMaster(request):
 		
 		sql = "INSERT INTO tblAppMaster (AppName,AppDesc) VALUES ('"+AppName+"','"+description+"' )"
 			
-		conn = sqlite3.connect('C:/Users/v480618/rama.db')
+		conn = sqlite3.connect('ansible.db')
 		
 		conn.execute(sql);
 		conn.commit();
@@ -54,7 +54,7 @@ def SaveEnvMaster(request):
 		
 		sql = "INSERT INTO tblEnvMaster (EnvName,EnvDesc) VALUES ('"+envName+"','"+description+"' )"
 			
-		conn = sqlite3.connect('C:/Users/v480618/rama.db')
+		conn = sqlite3.connect('ansible.db')
 		
 		conn.execute(sql);
 		conn.commit();
@@ -70,7 +70,7 @@ def SaveUserMaster(request):
 		
 		sql = "INSERT INTO tblUserMaster (Name,Email,UserEID) VALUES ('"+UserName+"','"+UserEmail+"','"+userEID+"'  )"
 			
-		conn = sqlite3.connect('C:/Users/v480618/rama.db')
+		conn = sqlite3.connect('ansible.db')
 		
 		conn.execute(sql);
 		conn.commit();
@@ -89,7 +89,7 @@ def SaveServerMaster(request):
 		
 		sql = "INSERT INTO tblServerMaster (ServerIP,ServerHost,ServerUserName,ServerCredential,Env,Application) VALUES ('"+Serverip+"','"+serverhost+"','"+serveruser+"','"+serverpwd+"','"+Env+"','"+App+"')"
 			
-		conn = sqlite3.connect('C:/Users/v480618/rama.db')
+		conn = sqlite3.connect('ansible.db')
 		
 		conn.execute(sql);
 		conn.commit();
@@ -106,7 +106,7 @@ def SaveTemplateMaster(request):
 		
 		sql = "INSERT INTO tblTemplateMaster (Template,TempName,TempGitUrl,PlayBook) VALUES ('"+Temp+"','"+TempName+"','"+TempGitUrl+"','"+playbooks+"')"
 			
-		conn = sqlite3.connect('C:/Users/v480618/rama.db')
+		conn = sqlite3.connect('ansible.db')
 		
 		conn.execute(sql);
 		conn.commit();
@@ -117,7 +117,7 @@ def SaveTemplateMaster(request):
 def TemplateMaster(request):
     return render(request, 'TemplateMaster.html')
 def Play(request):
-    return bindTemplateMaster(request)
+    return bindPlay(request)
     #return render(request, 'Play.html')
 def bindTemplateMaster(request):
 	try:
@@ -127,7 +127,7 @@ def bindTemplateMaster(request):
 			index(request)
 	except:
 		Login(request)		 
-	conn = sqlite3.connect('C:/Users/v480618/rama.db')
+	conn = sqlite3.connect('ansible.db')
 	Apps = conn.execute("SELECT DISTINCT AppName from tblAppMaster")
 	App = []
 	for row in Apps:
@@ -141,7 +141,7 @@ def bindTemplateMaster(request):
 	return render(request, 'play.html',context)
 def bindServerMaster(request):
 	try:
-		conn = sqlite3.connect('C:/Users/v480618/rama.db')
+		conn = sqlite3.connect('ansible.db')
 		Apps = conn.execute("SELECT DISTINCT AppName from tblAppMaster")
 		App = []
 		for row in Apps:
@@ -157,7 +157,80 @@ def bindServerMaster(request):
 		Login(request)		 
 	
 def SubmitPlay(request):
-    return render(request, 'TemplateMaster.html')	
+    return render(request, 'TemplateMaster.html')
+def Mapping(request):
+    return bindMapping(request)
+def bindMapping(request):
+	try:
+		conn = sqlite3.connect('ansible.db')
+		Apps = conn.execute("SELECT DISTINCT AppName from tblAppMaster")
+		App = []
+		for row in Apps:
+			App.append(str(row[0]))
+		Envs = conn.execute("SELECT DISTINCT EnvName from tblEnvMaster")
+		Env = []
+		for row in Envs:
+			Env.append(str(row[0]))
+		Users = conn.execute("SELECT DISTINCT Name from tblUserMaster")
+		User = []
+		for row in Users:
+			User.append(str(row[0]))
+		Hosts = conn.execute("SELECT DISTINCT ServerHost from tblServerMaster")
+		Host = []
+		for row in Hosts:
+			Host.append(str(row[0]))
+		conn.close()			
+		context=Context({'App':App,'Env':Env,'User':User,'Host':Host})
+		return render(request, 'Mapping.html',context)
+	except:
+		Login(request)
+def SaveMappings(request):
+	if 'App' in request.GET:
+		App=request.GET['App']
+		Env=request.GET['Env']
+		User=request.GET['User']
+		Host=request.GET['Host']
+				
+		sql = "INSERT INTO tblMapping (App,Env,User,HostName) VALUES ('"+App+"','"+Env+"','"+User+"','"+Host+"')"
+			
+		conn = sqlite3.connect('ansible.db')
+		
+		conn.execute(sql);
+		conn.commit();
+		message = 'Application: '+App
+	else:
+		message = 'You submitted an empty form.'
+	return home(request)
+def Contacts(request):
+	return render(request,'contact.html')
+def bindPlay(request):
+	try:
+		key = request.session['access_key']
+		age = request.session.get_expiry_age()
+		if age > 10:
+			index(request)
+	except:
+		Login(request)		 
+	conn = sqlite3.connect('ansible.db')
+	Apps = conn.execute("SELECT DISTINCT AppName from tblAppMaster")
+	App = []
+	for row in Apps:
+		App.append(str(row[0]))
+	Envs = conn.execute("SELECT DISTINCT EnvName from tblEnvMaster")
+	Env = []
+	for row in Envs:
+		Env.append(str(row[0]))
+	Servers = conn.execute("SELECT DISTINCT serverhost from tblServerMaster")
+	Server = []
+	for row in Servers:
+		Server.append(str(row[0]))
+	Temps = conn.execute("SELECT DISTINCT Template from tblTemplateMaster")
+	Temp = []
+	for row in Temps:
+		Temp.append(str(row[0]))
+	conn.close()			
+	context=Context({'App':App,'Env':Env,'Server':Server,'Temp':Temp})
+	return render(request, 'play.html',context)
 	
 
 			

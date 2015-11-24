@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from AnsiblePlus.views import index,AppMaster,EnvMaster,ServerMaster,UserMaster,login,Login,SaveAppMaster,SaveEnvMaster,SaveUserMaster,SaveServerMaster,home,SaveTemplateMaster,TemplateMaster,Play,bindTemplateMaster,SubmitPlay,Mapping
+from AnsiblePlus.views import index,AppMaster,EnvMaster,ServerMaster,UserMaster,login,Login,SaveAppMaster,SaveEnvMaster,SaveUserMaster,SaveServerMaster,home,SaveTemplateMaster,TemplateMaster,Play,bindTemplateMaster,SubmitPlay,Mapping,SaveMappings,Contacts
 
 urlpatterns = [
 	url(r'^login/$',login,name='login'),
@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^bindTemplateMaster/$',bindTemplateMaster, name='bindTemplateMaster'),
     url(r'^SubmitPlay/$',SubmitPlay, name='SubmitPlay'),
 	url(r'^Mapping/$',Mapping, name='Mapping'),
+	url(r'^SaveMappings/$',SaveMappings, name='SaveMappings'),
+	url(r'^Contacts/$',Contacts, name='Contacts'),
 ]
