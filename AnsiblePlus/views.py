@@ -135,7 +135,7 @@ def SetupPlay(request):
             html+='<tr>'            
             html+='<td>'+host+'</td>'
             html+='<td>'+value+'</td>'
-            html+='</tr>'               W     
+            html+='</tr>'
         # for msg in pb.stats.output():               
         # print msg
     html+='</table>'
