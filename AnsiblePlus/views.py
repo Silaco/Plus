@@ -186,7 +186,23 @@ def SubmitPlay(request):
     import ansiblepythonapi as myPlay
     args=['test.yml']
     message=myPlay.main(args)
-    return render(request, 'AnsibleResponce.html',message)
+    
+    objects=[]
+    for runner_results in myPlay.message:              
+        values=[]
+        for (host, value) in runner_results.get('dark', {}).iteritems():
+            values.append(host)
+            values.append(value['failed'])
+            values.append(value['msg'])    
+            objects.append(values)
+        for (host, value) in runner_results.get('contacted', {}).iteritems():
+            values.append(host)
+            values.append(value['failed'])
+            values.append(value['msg'])    
+            objects.append(values)
+        # for msg in pb.stats.output():   
+    context=Context({'Summary':objects})
+    return render(request, 'AnsibleResponce.html',context)
 def Mapping(request):
     return bindMapping(request)
 def bindMapping(request):
