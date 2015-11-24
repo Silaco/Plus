@@ -222,15 +222,21 @@ def SubmitPlay(request):
     for runner_results in myPlay.message:              
         values=[]
         for (host, value) in runner_results.get('dark', {}).iteritems():
-            values.append(host)
-            values.append(value['failed'])
-            values.append(value['msg'])    
-            objects.append(values)
+            try:
+                values.append(host)
+                values.append(value['failed'])
+                values.append(value['msg'])    
+                objects.append(values)
+            except:
+                pass
         for (host, value) in runner_results.get('contacted', {}).iteritems():
-            values.append(host)
-            values.append(value['failed'])
-            values.append(value['msg'])    
-            objects.append(values)
+           try:
+                values.append(host)
+                values.append(value['failed'])
+                values.append(value['msg'])    
+                objects.append(values)
+            except:
+                pass
         # for msg in pb.stats.output():   
     context=Context({'Summary':objects})
     return render(request, 'AnsibleResponce.html',context)
