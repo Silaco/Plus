@@ -122,7 +122,7 @@ def SetupPlay(request):
     args=['test.yml']
     message=myPlay.main(args)
     
-    return HttpResponse(str(message))
+    return HttpResponse(str(myPlay.message))
 def Play(request):
     return bindTemplateMaster(request)
     #return render(request, 'Play.html')

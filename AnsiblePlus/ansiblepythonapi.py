@@ -293,7 +293,7 @@ def main(args):
                     display("           to retry, use: --limit @%s\n" % filename)
             message=pb.stats.output()
             # for runner_results in pb.stats.output():      
-                # message.append(runner_results)
+                # # message.append(runner_results)
                 # for (host, value) in runner_results.get('dark', {}).iteritems():
                     # print 'dark' 
                     # print host
@@ -302,9 +302,9 @@ def main(args):
                 # for (host, value) in runner_results.get('contacted', {}).iteritems():
                     # print 'contacted' 
                     # print host
-                    # print value                    
+                    # print value               W     
                 # # for msg in pb.stats.output():               
-                # print msg
+                # # print msg
             for h in hosts:
                 t = pb.stats.summarize(h)
         
