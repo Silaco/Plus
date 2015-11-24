@@ -1,9 +1,6 @@
 from django.conf.urls import include, url
-<<<<<<< HEAD
-from AnsiblePlus.views import index,AppMaster,EnvMaster,ServerMaster,UserMaster,login,Login,SaveAppMaster,SaveEnvMaster,SaveUserMaster,SaveServerMaster,home,SaveTemplateMaster,TemplateMaster,Play,bindTemplateMaster,SubmitPlay,Mapping,SaveMappings,Contacts
-=======
-from AnsiblePlus.views import index,AppMaster,EnvMaster,ServerMaster,UserMaster,login,Login,SaveAppMaster,SaveEnvMaster,SaveUserMaster,SaveServerMaster,home,SaveTemplateMaster,TemplateMaster,Play,bindTemplateMaster,SubmitPlay,SetupPlay #Mapping
->>>>>>> c33fc051bd5095f503abd7e0a46ee76126288709
+from AnsiblePlus.views import index,AppMaster,EnvMaster,ServerMaster,UserMaster,login,Login,SaveAppMaster,SaveEnvMaster,SaveUserMaster,SaveServerMaster,home,SaveTemplateMaster,TemplateMaster,Play,bindTemplateMaster,SubmitPlay,SetupPlay,Mapping,SaveMappings,Contacts
+
 
 urlpatterns = [
 	url(r'^login/$',login,name='login'),
@@ -23,12 +20,9 @@ urlpatterns = [
     url(r'^Play/$',Play, name='Play'),
     url(r'^bindTemplateMaster/$',bindTemplateMaster, name='bindTemplateMaster'),
     url(r'^SubmitPlay/$',SubmitPlay, name='SubmitPlay'),
-<<<<<<< HEAD
 	url(r'^Mapping/$',Mapping, name='Mapping'),
 	url(r'^SaveMappings/$',SaveMappings, name='SaveMappings'),
 	url(r'^Contacts/$',Contacts, name='Contacts'),
-=======
-	# url(r'^Mapping/$',Mapping, name='Mapping'),
+	url(r'^Mapping/$',Mapping, name='Mapping'),
     url(r'^SetupPlay/$',SetupPlay, name='SetupPlay')    
->>>>>>> c33fc051bd5095f503abd7e0a46ee76126288709
 ]

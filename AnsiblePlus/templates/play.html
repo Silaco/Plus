@@ -1,6 +1,6 @@
 {% extends 'basemaster/masterstyle.html' %}
 {% block contententry %}
-<form action="/SubmitPlay/" method="post">{% csrf_token %}
+<form action="/SubmitPlay/" method="get">{% csrf_token %}
 <table  cellpadding='5' cellspacing='5' width='95%'>
 					<tr>
 						<td>

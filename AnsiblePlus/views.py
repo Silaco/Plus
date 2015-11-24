@@ -104,7 +104,7 @@ def SaveTemplateMaster(request):
 		TempGitUrl=request.POST['TempGitUrl']
 		playbooks=request.POST['playbooks']
 		
-		sql = "INSERT INTO tblTemplateMaster (Template,TempName,TempGitUrl,PlayBook) VALUES ('"+Temp+"','"+TempName+"','"+TempGitUrl+"','"+playbooks+"')"
+		sql = "INSERT INTO tblTemplateMaster (Template,TempNa,TempGitUrl,PlayBook) VALUES ('"+Temp+"','"+TempName+"','"+TempGitUrl+"','"+playbooks+"')"
 			
 		conn = sqlite3.connect('ansible.db')
 		
@@ -162,8 +162,11 @@ def bindServerMaster(request):
 	except:
 		Login(request)		 
 	
-def SubmitPlay(request):
-    return render(request, 'TemplateMaster.html')
+def SubmitPlay(request):	
+    import ansiblepythonapi as myPlay
+    args=['test.yml']
+    message=myPlay.main(args)
+    return render(request, 'AnsibleResponce.html',message)
 def Mapping(request):
     return bindMapping(request)
 def bindMapping(request):
