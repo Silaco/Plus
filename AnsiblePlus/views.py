@@ -121,7 +121,8 @@ def SetupPlay(request):
     import ansiblepythonapi as myPlay
     args=['test.yml']
     message=myPlay.main(args)
-    return HttpResponse(message)
+    
+    return HttpResponse(str(message))
 def Play(request):
     return bindTemplateMaster(request)
     #return render(request, 'Play.html')
