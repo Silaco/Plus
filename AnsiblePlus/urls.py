@@ -19,6 +19,6 @@ urlpatterns = [
     url(r'^Play/$',Play, name='Play'),
     url(r'^bindTemplateMaster/$',bindTemplateMaster, name='bindTemplateMaster'),
     url(r'^SubmitPlay/$',SubmitPlay, name='SubmitPlay'),
-	url(r'^Mapping/$',Mapping, name='Mapping'),
+	# url(r'^Mapping/$',Mapping, name='Mapping'),
     url(r'^SetupPlay/$',SetupPlay, name='SetupPlay')    
 ]
