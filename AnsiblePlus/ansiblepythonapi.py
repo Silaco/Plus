@@ -76,10 +76,12 @@ def hostcolor(host, stats, color=True):
             return "%-37s" % stringc(host, 'green')
     return "%-26s" % host
 
+    
+message=[]
 
 def main(args):
     ''' run ansible-playbook operations '''
-
+    global message
     # create parser for CLI options
     parser = utils.base_parser(
         constants=C,
@@ -290,17 +292,18 @@ def main(args):
                 if filename:
                     display("           to retry, use: --limit @%s\n" % filename)
             
-            for runner_results in pb.stats.output():              
-                for (host, value) in runner_results.get('dark', {}).iteritems():
-                    print 'dark' 
-                    print host
-                    print value
+            for runner_results in pb.stats.output():      
+                message.append(runner_results)
+                # for (host, value) in runner_results.get('dark', {}).iteritems():
+                    # print 'dark' 
+                    # print host
+                    # print value
                     
-                for (host, value) in runner_results.get('contacted', {}).iteritems():
-                    print 'contacted' 
-                    print host
-                    print value                    
-                # for msg in pb.stats.output():               
+                # for (host, value) in runner_results.get('contacted', {}).iteritems():
+                    # print 'contacted' 
+                    # print host
+                    # print value                    
+                # # for msg in pb.stats.output():               
                 # print msg
             for h in hosts:
                 t = pb.stats.summarize(h)
@@ -334,7 +337,7 @@ def main(args):
             display(u"ERROR: %s" % utils.unicode.to_unicode(e, nonstring='simplerepr'), color='red')
             return 1
 
-    return 0
+    return message
 
 
 if __name__ == "__main__":
