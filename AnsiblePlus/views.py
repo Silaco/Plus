@@ -315,6 +315,8 @@ def bindPlay(request):
     conn.close()            
     context=Context({'App':App,'Env':Env,'Server':Server,'Temp':Temp})
     return render(request, 'play.html',context)
+def BindAdminMenu(request):
+    return render(request,'Adminlinks.html')
     
 
             
