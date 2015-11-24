@@ -184,43 +184,43 @@ def bindServerMaster(request):
 	
 def SubmitPlay(request):	
     import jinja2
-	from tempfile import NamedTemporaryFile
-	import os
-	
-	playBook=request.GET['playBook']
-	Group=request.GET['Group']
-	
-	conn = sqlite3.connect('test.db')
-	cursor = conn.execute("SELECT NAME from HOSTS WHERE GROUPNAME='"+Group+"'")
-	html = ''
-	
-	inventory = """
-	[current]
-	{{ public_ip_address }}
-	"""
-	for row in request.GET:
+    from tempfile import NamedTemporaryFile
+    import os
+
+    playBook=request.GET['playBook']
+    Group=request.GET['Group']
+
+    conn = sqlite3.connect('test.db')
+    cursor = conn.execute("SELECT NAME from HOSTS WHERE GROUPNAME='"+Group+"'")
+    html = ''
+
+    inventory = """
+    [current]
+    {{ public_ip_address }}
+    """
+    for row in request.GET:
         if row.name=='Servers'
             html=html+str(row.value+'\n')
-	conn.close()		
-	
-	
-	inventory_template = jinja2.Template(inventory)
-	rendered_inventory = inventory_template.render({
-		'public_ip_address': html    
-		# and the rest of our variables
-	})
+    conn.close()		
 
-	# Create a temporary file and write the template string to it
-	hosts = NamedTemporaryFile(delete=False)
-	hosts.write(rendered_inventory)
-	hosts.close()
-    
+
+    inventory_template = jinja2.Template(inventory)
+    rendered_inventory = inventory_template.render({
+        'public_ip_address': html    
+        # and the rest of our variables
+    })
+
+    # Create a temporary file and write the template string to it
+    hosts = NamedTemporaryFile(delete=False)
+    hosts.write(rendered_inventory)
+    hosts.close()
+
     import ansiblepythonapi as myPlay
     args=['test.yml']
     args.append('-i')
     args.append(host.name)
     message=myPlay.main(args)
-    
+
     objects=[]
     for runner_results in myPlay.message:              
         values=[]
