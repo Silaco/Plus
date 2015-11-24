@@ -4,9 +4,9 @@
 <table>
 {% for a in Summary %}										
 <tr>
-<td>{{ a[0] }}</td>
-<td>{{ a[1] }}</td>
-<td>{{ a[2] }}</td>
+{% for val in a %}										
+<td>{{ val }}</td>
+{% endfor %}
 </tr>							
 {% endfor %}
 
