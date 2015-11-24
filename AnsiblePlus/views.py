@@ -190,8 +190,7 @@ def SubmitPlay(request):
     playBook=request.GET['playBook']
     Group=request.GET['Group']
 
-    conn = sqlite3.connect('test.db')
-    cursor = conn.execute("SELECT NAME from HOSTS WHERE GROUPNAME='"+Group+"'")
+   
     html = ''
 
     inventory = """
@@ -201,7 +200,7 @@ def SubmitPlay(request):
     for row in request.GET:
         if row.name=='Servers':
             html=html+str(row.value+'\n')
-    conn.close()		
+   
 
 
     inventory_template = jinja2.Template(inventory)
