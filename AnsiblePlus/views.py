@@ -187,9 +187,6 @@ def SubmitPlay(request):
     from tempfile import NamedTemporaryFile
     import os
 
-    playBook=request.GET['playBook']
-    Group=request.GET['Group']
-
    
     html = ''
 
