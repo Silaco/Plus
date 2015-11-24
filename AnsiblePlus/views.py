@@ -121,8 +121,25 @@ def SetupPlay(request):
     import ansiblepythonapi as myPlay
     args=['test.yml']
     message=myPlay.main(args)
+    html=''
+    html+='<table>'
     
-    return HttpResponse(str(myPlay.message))
+    for runner_results in myPlay.message:      
+        # message.append(runner_results)
+        for (host, value) in runner_results.get('dark', {}).iteritems():
+            html+='<tr>'            
+            html+='<td>'+host+'</td>'
+            html+='<td>'+value+'</td>'
+            html+='</tr>'    
+        for (host, value) in runner_results.get('contacted', {}).iteritems():
+            html+='<tr>'            
+            html+='<td>'+host+'</td>'
+            html+='<td>'+value+'</td>'
+            html+='</tr>'               W     
+        # for msg in pb.stats.output():               
+        # print msg
+    html+='</table>'
+    return HttpResponse(html)
 def Play(request):
     return bindTemplateMaster(request)
     #return render(request, 'Play.html')
