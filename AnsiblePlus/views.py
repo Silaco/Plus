@@ -216,8 +216,8 @@ def SubmitPlay(request):
 
     import ansiblepythonapi as myPlay
     args=['/home/ec2-user/playss/AnsiblePlus/test.yml']
-    args.append('-i')
-    args.append(hosts.name)
+    # args.append('-i')
+    # args.append(hosts.name)
     message=myPlay.main(args)
 
     objects=[]
