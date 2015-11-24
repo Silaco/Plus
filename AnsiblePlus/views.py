@@ -122,19 +122,21 @@ def SetupPlay(request):
     args=['test.yml']
     message=myPlay.main(args)
     html=''
-    html+='<table>'
+    html+='<table border=1 cellspacing=5 cellpadding=5>'
     
     for runner_results in myPlay.message:      
         # message.append(runner_results)
         for (host, value) in runner_results.get('dark', {}).iteritems():
             html+='<tr>'            
             html+='<td>'+host+'</td>'
-            html+='<td>'+str(value)+'</td>'
+            html+='<td>'+str(value['failed'])+'</td>'
+            html+='<td>'+str(value['msg'])+'</td>'
             html+='</tr>'    
         for (host, value) in runner_results.get('contacted', {}).iteritems():
             html+='<tr>'            
             html+='<td>'+host+'</td>'
-            html+='<td>'+str(value)+'</td>'
+            html+='<td>'+str(value['failed'])+'</td>'
+            html+='<td>'+str(value['msg'])+'</td>'
             html+='</tr>'
         # for msg in pb.stats.output():               
         # print msg
