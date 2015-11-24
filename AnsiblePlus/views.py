@@ -116,6 +116,12 @@ def SaveTemplateMaster(request):
 	return home(request)
 def TemplateMaster(request):
     return render(request, 'TemplateMaster.html')
+    
+def SetupPlay(request):
+    import ansiblepythonapi as myPlay
+    args=['test.yml']
+    message=myPlay.main(args)
+    return message
 def Play(request):
     return bindTemplateMaster(request)
     #return render(request, 'Play.html')
