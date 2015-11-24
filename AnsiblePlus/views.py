@@ -129,12 +129,12 @@ def SetupPlay(request):
         for (host, value) in runner_results.get('dark', {}).iteritems():
             html+='<tr>'            
             html+='<td>'+host+'</td>'
-            html+='<td>'+value+'</td>'
+            html+='<td>'+str(value)+'</td>'
             html+='</tr>'    
         for (host, value) in runner_results.get('contacted', {}).iteritems():
             html+='<tr>'            
             html+='<td>'+host+'</td>'
-            html+='<td>'+value+'</td>'
+            html+='<td>'+str(value)+'</td>'
             html+='</tr>'
         # for msg in pb.stats.output():               
         # print msg
