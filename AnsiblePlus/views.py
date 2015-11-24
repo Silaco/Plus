@@ -232,7 +232,7 @@ def SubmitPlay(request):
             except:
                 pass
         for (host, value) in runner_results.get('contacted', {}).iteritems():
-           try:
+            try:
                 values.append(host)
                 values.append(value['failed'])
                 values.append(value['msg'])    
