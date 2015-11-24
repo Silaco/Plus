@@ -194,7 +194,8 @@ def SubmitPlay(request):
     [current]
     {{ public_ip_address }}
     """
-    for row in request.GET:
+    for row(name,value) in request.GET:
+        
         if row.name=='Servers':
             html=html+str(row.value+'\n')
    
