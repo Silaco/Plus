@@ -1,0 +1,57 @@
+{% extends 'basemaster/masterstyle.html' %}
+{% block contententry %}
+<form action="/SaveServerMaster/" method="get">{% csrf_token %}
+<table  cellpadding='5' cellspacing='5' width='95%'>
+					<tr>
+						<td>
+						<h2>Server Master</h2>
+						</td>
+					</tr>
+					<tr>
+					<td><hr/></td>
+					</tr>
+					
+					
+					<tr>
+						<td>
+							<table>
+								<tr>
+								<td>Application</td><td><select name="App" style="width:150px;"> 
+									{% for a in App %}										
+									<option  value="{{ a  }}">{{ a }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<tr>
+								<td>Environment</td><td><select name="Env" style="width:150px;"> 
+									{% for a in Env %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<td>Server IP</td><td><input type="text" name="serverip" style="width:150px;"></td>
+								</tr>
+								<tr>
+								<td>Host Name</td><td><input type="text" name="serverhost" style="width:150px;"></td>
+								</tr>
+								<tr>
+								<td>Server UserName</td><td><input type="text" name="serveruser" style="width:150px;"></td>
+								</tr>
+								<tr>
+								<td>Server Credentials</td><td><input type="text" name="serverpwd" style="width:150px;"></td>
+								</tr>
+								<tr>
+								<td></td><td><input type="submit" value="Submit"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+					<td><hr/></td>
+					</tr>
+				</table>
+</form>
+	{% endblock %}
+        
+    
+    

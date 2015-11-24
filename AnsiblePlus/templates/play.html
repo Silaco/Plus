@@ -1,0 +1,63 @@
+{% extends 'basemaster/masterstyle.html' %}
+{% block contententry %}
+<form action="/SubmitPlay/" method="post">{% csrf_token %}
+<table  cellpadding='5' cellspacing='5' width='95%'>
+					<tr>
+						<td>
+						<h2>Play</h2>
+						</td>
+					</tr>
+					<tr>
+					<td><hr/></td>
+					</tr>
+					
+					
+					<tr>
+						<td>
+							<table>
+								<tr>
+								<td>Application</td><td><select name="App" style="width:150px;"> 
+									{% for a in App %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<tr>
+								<td>Environment</td><td><select name="Env" style="width:150px;"> 
+									{% for a in Env %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+                                <tr>
+								<td>Servers</td>
+								<td>
+								<select multiple="multiple"  name="Severs" id="Severs" size="5" style="width:150px;">
+									{% for a in Env  %}
+									<option value="{{ a  }}">{{ a  }}</option>
+								    {% endfor %}
+									</select>
+								</td>
+								</tr>
+                                <tr>
+								<td>Template</td><td><select name="Temp" style="width:150px;"> 
+									{% for a in Temp %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<tr>
+								<td></td><td><input type="submit" value="Submit"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+					<td><hr/></td>
+					</tr>
+				</table>
+</form>
+	{% endblock %}
+        
+    
+    

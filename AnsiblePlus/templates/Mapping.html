@@ -1,0 +1,59 @@
+{% extends 'basemaster/masterstyle.html' %}
+{% block contententry %}
+<form action="/SaveServerMaster/" method="get">{% csrf_token %}
+<table  cellpadding='5' cellspacing='5' width='95%'>
+					<tr>
+						<td>
+						<h2>Server Master</h2>
+						</td>
+					</tr>
+					<tr>
+					<td><hr/></td>
+					</tr>
+					
+					
+					<tr>
+						<td>
+							<table>
+								<tr>
+								<td>Application</td><td><select name="App" style="width:150px;"> 
+									{% for a in App %}										
+									<option  value="{{ a  }}">{{ a }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<tr>
+								<td>Environment</td><td><select name="Env" style="width:150px;"> 
+									{% for a in Env %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<td>User</td><td><select name="User" style="width:150px;"> 
+									{% for a in User %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>
+								<tr>
+								<td>Host Name</td><td><select name="Host" style="width:150px;"> 
+									{% for a in Host %}										
+									<option  value="{{ a  }}">{{ a  }}</option>									
+									{% endfor %}										
+								</select></td>
+								</tr>								
+								<tr>
+								<td></td><td><input type="submit" value="Submit"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+					<td><hr/></td>
+					</tr>
+				</table>
+</form>
+	{% endblock %}
+        
+    
+    
